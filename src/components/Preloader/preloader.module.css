@@ -1,0 +1,116 @@
+.preloader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #1f1939;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 120px;
+}
+
+.preloader .circle {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #1f1939;
+  border-radius: 50%;
+  -webkit-animation: loading 1s ease-in-out infinite;
+          animation: loading 1s ease-in-out infinite;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+  position: relative;
+}
+
+.preloader .circle1 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.preloader .circle2 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.preloader .circle3 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.preloader .circle4 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.preloader .circle5 {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.preloader .circle6 {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+.preloader .circle7 {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+
+.preloader .circle8 {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    background-color: #1f1939;
+  }
+  30% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    background-color: #cccccc;
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    background-color: #cccccc;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    background-color: #1f1939;
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    background-color: #1f1939;
+  }
+  30% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    background-color: #cccccc;
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    background-color: #cccccc;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    background-color: #1f1939;
+  }
+}
+/*# sourceMappingURL=preloader.module.css.map */

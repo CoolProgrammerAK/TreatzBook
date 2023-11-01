@@ -1,0 +1,50 @@
+.appointments {
+    &--header {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    &__table {
+        margin: 2rem auto;
+        margin-top: 6rem;
+        font-size: 1.8rem;
+
+        border-collapse: collapse;
+        width: 70%;
+        color: #333;
+        text-align: center;
+
+        &--w9 {
+            width: 90%;
+        }
+
+        thead > tr > th {
+            background-color: #83abfa;
+        }
+        td,
+        th {
+            border: 1px solid #ccc;
+            text-align: left;
+            padding: 10px;
+        }
+
+        th,
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        &--btn {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: #fd3b05;
+                color: #fff;
+            }
+        }
+    }
+}
