@@ -8,6 +8,7 @@ import MetaComponent from "../components/Meta/MetaComponent";
 import metaData from "../seeds/metaData";
 
 const DashboardContainer = ({ user }) => {
+  console.log(user)
   return (
     <>
       <MetaComponent

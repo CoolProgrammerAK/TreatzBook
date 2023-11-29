@@ -6,6 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  REGISTER_FAIL_MSG,
+  LOGIN_FAIL_MSG,
 } from "../ActionConstants/index";
 
 const initialState = {
@@ -13,6 +15,8 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  loginMessage:"",
+  registerMessage:""
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +29,9 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload,
+        loginMessage:"",
+        registerMessage:""
+
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
@@ -34,7 +41,21 @@ export default function (state = initialState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false,
+        loginMessage:"",
+        registerMessage:""
       };
+      case REGISTER_FAIL_MSG:
+        return {
+          ...state,
+          loginMessage:"",
+          registerMessage:payload
+         }
+      case LOGIN_FAIL_MSG:
+         return {
+          ...state,
+          loginMessage:payload,
+          registerMessage:""
+         }
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case AUTH_ERROR:
@@ -44,8 +65,13 @@ export default function (state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false,
+        loading:false,
+        loginMessage:"",
+        registerMessage:""
       };
+  
+
+    
     default:
       return state;
   }

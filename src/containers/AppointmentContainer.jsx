@@ -11,9 +11,9 @@ import Preloader from "../components/Preloader/Preloader";
 import DashboardNavbar from "../components/Dashboard/DashboardNavbar";
 
 const AppointmentContainer = ({ loading, user, appointments, getBookings }) => {
-//   useEffect(() => {
-//     getBookings();
-//   }, [getBookings]);
+  useEffect(() => {
+    getBookings();
+  }, [getBookings]);
 
   // console.log(appointments);
   return (
@@ -24,8 +24,8 @@ const AppointmentContainer = ({ loading, user, appointments, getBookings }) => {
         keywords={metaData.home.keywords}
       />
       <>
-      <DoctorAppointments />
-        {/* {loading || user == null ? (
+      {/* <DoctorAppointments /> */}
+        {loading || user == null ? (
           <Preloader />
         ) : (
           <>
@@ -35,7 +35,7 @@ const AppointmentContainer = ({ loading, user, appointments, getBookings }) => {
               <PatientAppointments />
             )}
           </>
-        )} */}
+        )}
       </>
     </>
   );

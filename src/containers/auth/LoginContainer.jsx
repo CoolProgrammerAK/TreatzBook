@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import authLogo from "../../assets/svgs/auth-logo.svg";
 import { IconButton } from "@mui/material";
 import { useRouter } from "../../utils/useRouter";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions/auth";
 // import { Redirect } from "react-router-dom";
-import {redirect} from 'react-router-dom'
 import {Close} from '@mui/icons-material'
-const LoginContainer = ({ isAuthenticated, login }) => {
-  
+import { ToastContainer } from "react-toastify";
+const LoginContainer = ({ isAuthenticated, login, message }) => {
+  let navigate = useNavigate();
   const router = useRouter();
   console.log(router)
   const [formData, setFormData] = useState({
@@ -21,17 +21,31 @@ const LoginContainer = ({ isAuthenticated, login }) => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  console.log(isAuthenticated)
   if (isAuthenticated) {
-    return redirect("/dashboard")
+    return navigate("/dashboard")
   }
 
   const onSubmit = async (e) => {
     e.preventDefault();
     login(email, password);
   };
-
+console.log(message)
   return (
     <div className="login">
+      
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable={false}
+pauseOnHover={false}
+theme="light"
+/>
       <div className="login__sidebar">
         <div className="login__sidebar-logo">
           <img src={authLogo} alt="authlogo" />
@@ -82,7 +96,6 @@ const LoginContainer = ({ isAuthenticated, login }) => {
             </label>
           </div>
           <button
-            onClick={login}
             className="button button--primary login__box-form--button"
           >
             Sign In
@@ -100,8 +113,9 @@ const LoginContainer = ({ isAuthenticated, login }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => (console.log(state),{
   isAuthenticated: state.auth.isAuthenticated || false,
+  message:state.auth.loginMessage
 });
 
 export default connect(mapStateToProps, { login })(LoginContainer);

@@ -6,9 +6,9 @@ import {Close} from '@mui/icons-material'
 import { useRouter } from "../../utils/useRouter";
 import { register } from "../../redux/actions/auth";
 import { connect } from "react-redux";
-import { redirect } from "react-router-dom";
-
-const RegisterContainer = ({ isAuthenticated, register }) => {
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+const RegisterContainer = ({ isAuthenticated, register, message }) => {
   const router = useRouter();
 
   const [radioOption, setRadioOption] = useState("user");
@@ -25,7 +25,7 @@ const RegisterContainer = ({ isAuthenticated, register }) => {
     country: "",
     location: [],
   });
-
+const navigate=useNavigate()
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
 
@@ -39,7 +39,7 @@ const RegisterContainer = ({ isAuthenticated, register }) => {
   }, [lat, long]);
 
   if (isAuthenticated) {
-    return redirect("/dashboard");
+    return navigate("/dashboard");
   }
 
   const onRadioChange = (e) => {
@@ -59,9 +59,22 @@ const RegisterContainer = ({ isAuthenticated, register }) => {
     e.preventDefault();
     register(formData);
   };
-
+console.log(message)
   return (
     <div className="login">
+    
+          <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable={false}
+pauseOnHover={false}
+theme="light"
+/>
       <div className="login__box">
         <IconButton onClick={() => router.push("/")} className="close">
           <Close />
@@ -274,6 +287,7 @@ const RegisterContainer = ({ isAuthenticated, register }) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated || false,
+  message:state.auth.registerMessage
 });
 
 export default connect(mapStateToProps, { register })(RegisterContainer);

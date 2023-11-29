@@ -1,9 +1,9 @@
 import React, { lazy, useEffect } from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Routes, Route, useLocation, Navigate ,useNavigate} from "react-router-dom";
 // import Booking from "../components/Dashboard/Booking";
+import { connect } from "react-redux";
 import DashboardContainer from "../containers/DashboardContainer";
-// import { loadUser } from "../redux/actions/auth";
+import {loadUser } from "../redux/actions/auth";
 import { store } from "../redux/store/store";
 import setAuthToken from "../utils/setAuthToken";
 import PrivateRoute from "./PrivateRoute";
@@ -22,13 +22,14 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const AppRouter = () => {
+const AppRouter = ({auth: { isAuthenticated, loading }}) => {
+  const navigate=useNavigate()
   let location = useLocation();
 console.log(location)
 
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
 
     // <TransitionGroup>
@@ -37,14 +38,18 @@ console.log(location)
       <Route exact path="/" element={<LandingContainer></LandingContainer>} />
       <Route exact path="/login" element={<LoginContainer></LoginContainer>} />
       <Route exact path="/register" element={<RegisterContainer></RegisterContainer>} />
-      <Route exact path="/dashboard" element={<DashboardContainer></DashboardContainer>} />
-      {/* <Route exact path="/doctor/:id" component={Booking} /> */}
       <Route
-        exact
-        path="/appointments"
-       element={<AppointmentContainer></AppointmentContainer>}
-      />
+      exact path="/dashboard"
+      element={!isAuthenticated && !loading ? <LoginContainer></LoginContainer> : <DashboardContainer></DashboardContainer>}
+    />
+      {/* <PrivateRoute exact path="/dashboard" component={<DashboardContainer></DashboardContainer>} /> */}
+      {/* <Route exact path="/doctor/:id" element={Booking} />  */}
+      <Route
+      exact path="/appointments"
+      element={!isAuthenticated && !loading ? <LoginContainer></LoginContainer> : <AppointmentContainer></AppointmentContainer>}
+    />
       <Route path="*" exact element={<NotFoundContainer></NotFoundContainer>} />
+      
       {/* <Navigate to="/404" /> */}
     </Routes>
     //   </CSSTransition>
@@ -52,4 +57,8 @@ console.log(location)
   );
 };
 
-export default AppRouter;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(AppRouter);

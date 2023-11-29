@@ -1,18 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Navigate } from "react-router-dom";
+import { Route, Navigate, redirect ,useNavigate} from "react-router-dom";
+import LoginContainer from "../containers/auth/LoginContainer";
 
 const PrivateRoute = ({
   auth: { isAuthenticated, loading },
   component: Component,
   ...rest
 }) => {
+  const navigate=useNavigate()
   return (
     <Route
       {...rest}
       render={(props) =>
         !isAuthenticated && !loading ? (
-          <Navigate to="/login" />
+           navigate('/login')
         ) : (
           <Component {...props} />
         )

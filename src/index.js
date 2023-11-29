@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import Preloader from './components/Preloader/Preloader';
 import { AppRouter } from './routers';
 import { store } from "./redux/store/store";
+import 'react-toastify/dist/ReactToastify.css';
 // styles
 import "./styles/styles.scss";
 const root = ReactDOM.createRoot(document.getElementById('root'));

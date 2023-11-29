@@ -10,6 +10,7 @@
   &__group {
     &:not(:last-child) {
       margin-bottom: 2rem;
+      width: 75%
     }
 
     &--first {

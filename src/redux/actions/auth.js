@@ -7,15 +7,18 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  LOGIN_FAIL_MSG,
+  REGISTER_FAIL_MSG,
 } from "../ActionConstants/index";
 import setAuthToken from "../../utils/setAuthToken";
+import { toast } from "react-toastify";
 
 // load user
-const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-
+console.log(localStorage)
   try {
     const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/auth`);
     // console.log("data", res);
@@ -44,7 +47,7 @@ export const register = (formData) => async (dispatch) => {
       formData,
       config
     );
-
+console.log(res)
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
@@ -52,22 +55,27 @@ export const register = (formData) => async (dispatch) => {
 
     dispatch(loadUser());
   } catch (err) {
-    // const errors = err.response.data.errors;
-
-    // if (errors) {
-    //   errors.forEach((error) => console.log(error));
-    // }
 
     console.log(err);
     dispatch({
       type: REGISTER_FAIL,
     });
+    toast.error(err.response.data.message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+      });
   }
 };
 
 // login
 export const login = (email, password) => async (dispatch) => {
-  // console.log("login here", email, password);
+  //  console.log("login here", email, password);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -90,12 +98,21 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-
     // dispatch(loadUser());
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
     });
+    toast.error(err.response.data.message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+      });
   }
 };
 
