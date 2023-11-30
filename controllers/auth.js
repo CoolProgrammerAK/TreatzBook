@@ -30,7 +30,7 @@ module.exports.register = async (req, res) => {
 
     const userData = {};
     const doctorData = {};
-
+console.log(req.body.location)
     User.findOne({ email: email.toLowerCase() }).then( (response) => {
       // if (error) {
       //   return res
@@ -38,9 +38,8 @@ module.exports.register = async (req, res) => {
       //     .json({ message: "error occurred", error: error });
       // } else
        if (response) {
-        return res.status(200).json({
+        return res.status(404).json({
           message: "User already exist with same email id",
-          response: response,
         });
       } else {
         utility.hash(req.body.password, (error, hash) => {
@@ -65,7 +64,7 @@ module.exports.register = async (req, res) => {
           }
 
           try {
-            consle.log(userData)
+            // console.log(userData)
             User.create(userData).then(async(response) => {
               // console.log(error,response)
               // if (error) {
@@ -91,8 +90,9 @@ module.exports.register = async (req, res) => {
                   user: response,
                 });
               } else {
+                console.log(error)
                 return res
-                  .status(400)
+                  .status(404)
                   .json({ message: "Error occurred", error: error });
               }
             });
@@ -118,11 +118,9 @@ module.exports.register = async (req, res) => {
  **/
 module.exports.login = async (req, res) => {
   try {
-    console.log(req.body.email, req.body.password);
-    let check = {
-      email: req.body.email ? req.body.email.toLowerCase() : req.body.email,
-    };
-    let response = await User.findOne(check);
+    console.log("9",req.body.email, req.body.password);
+    let response = await User.findOne({ email: req.body.email.toLowerCase() });
+    console.log(response)
     if (response) {
       utility.check(req.body.password, response.password, (error, match) => {
         if (match) {
@@ -135,8 +133,7 @@ module.exports.login = async (req, res) => {
             message: "user found, token sent",
             token: token,
             user: response,
-          });
-        } else {
+          });        } else {
           return res
             .status(404)
             .json({ message: "Invalid email id or password" });
@@ -146,7 +143,7 @@ module.exports.login = async (req, res) => {
       return res.status(404).json({ message: "Invalid email id or password" });
     }
   } catch (err) {
-    console.log(err);
+  
     return res.status(500).json({ message: "Unable to Log in" });
   }
 };

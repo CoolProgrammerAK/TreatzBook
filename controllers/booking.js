@@ -13,14 +13,14 @@ module.exports.getBookings = async (req, res) => {
     const { userType, id } = req.decoded;
     let appointments = [];
     if (userType === "doctor") {
-      Booking.find({ doctor_user_id: id })
+    var data=  await Booking.find({ doctor_user_id: id })
         .populate("user_id")
-        .exec((err, data) => {
-          if (err) {
-            return res
-              .status(400)
-              .json({ message: "error occurred", error: err });
-          } else {
+        // .exec((err, data) => {
+        //   if (err) {
+        //     return res
+        //       .status(400)
+        //       .json({ message: "error occurred", error: err });
+        //   } else {
             console.log(data);
             // format data in appointments
             appointments = data.map((appointment) => {
@@ -33,18 +33,19 @@ module.exports.getBookings = async (req, res) => {
               };
             });
             return res.json(appointments);
-          }
-        });
+          // }
+        // });
     } else {
-      Booking.find({ user_id: id })
+     var data=await Booking.find({ user_id: id })
         .populate("doctor_id")
-        .exec((err, data) => {
-          if (err) {
-            return res
-              .status(400)
-              .json({ message: "error occurred", error: err });
-          } else {
+        // .exec((err, data) => {
+        //   if (err) {
+        //     return res
+        //       .status(400)
+        //       .json({ message: "error occurred", error: err });
+        //   } else {
             // format data in appointments
+            // console.log(data)
             appointments = data.map((appointment) => {
               return {
                 bookingDate: appointment.bookingDate,
@@ -61,8 +62,8 @@ module.exports.getBookings = async (req, res) => {
             });
             return res.json(appointments);
           }
-        });
-    }
+        // });
+    // }
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server error");
@@ -75,7 +76,7 @@ module.exports.getBookings = async (req, res) => {
 module.exports.getBooking = async (req, res) => {
   try {
     const booking = await Booking.find({
-      doctor_id: new ObjectID(req.params.id),
+      doctor_id: req.params.id,
     }).select("-user_id -doctor_id -updated -created");
     if (!booking) {
       return res.json();
