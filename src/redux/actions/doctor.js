@@ -45,6 +45,7 @@ export const getDoctorsSorted = (long, lat) => async (dispatch) => {
       type: GET_DOCTORS,
       payload: res.data,
     });
+    console.log(res)
   } catch (err) {
     console.log(err);
     dispatch({ type: CLEAR_PROFILE });

@@ -19,6 +19,7 @@ export const getBooking = (id) => async (dispatch) => {
       type: GET_BOOKING,
       payload: res.data,
     });
+    console.log(res)
   } catch (err) {
     console.log(err);
     dispatch({ type: CLEAR_PROFILE });

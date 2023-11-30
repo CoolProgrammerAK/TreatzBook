@@ -8,6 +8,7 @@ import { store } from "../redux/store/store";
 import setAuthToken from "../utils/setAuthToken";
 import PrivateRoute from "./PrivateRoute";
 import AppointmentContainer from "../containers/AppointmentContainer";
+import Booking from "../components/Dashboard/Booking";
 
 const LandingContainer = lazy(() => import("../containers/LandingContainer"));
 const LoginContainer = lazy(() => import("../containers/auth/LoginContainer"));
@@ -42,8 +43,7 @@ console.log(location)
       exact path="/dashboard"
       element={!isAuthenticated && !loading ? <LoginContainer></LoginContainer> : <DashboardContainer></DashboardContainer>}
     />
-      {/* <PrivateRoute exact path="/dashboard" component={<DashboardContainer></DashboardContainer>} /> */}
-      {/* <Route exact path="/doctor/:id" element={Booking} />  */}
+      <Route exact path="/doctor/:id" element={!isAuthenticated && !loading ? <LoginContainer></LoginContainer> :<Booking></Booking>} /> 
       <Route
       exact path="/appointments"
       element={!isAuthenticated && !loading ? <LoginContainer></LoginContainer> : <AppointmentContainer></AppointmentContainer>}

@@ -31,12 +31,12 @@ const navigate=useNavigate()
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      // console.log("Latitude is :", position.coords.latitude);
-      // console.log("Longitude is :", position.coords.longitude);
+      console.log(position.coords.latitude)
       setLat(position.coords.latitude);
+      console.log(lat)
       setLong(position.coords.longitude);
     });
-  }, [lat, long]);
+  }, [long,lat]);
 
   if (isAuthenticated) {
     return navigate("/dashboard");
@@ -56,10 +56,12 @@ const navigate=useNavigate()
   };
 
   const onSubmit = async (e) => {
+   
     e.preventDefault();
+   console.log(formData)
     register(formData);
   };
-console.log(message)
+// console.log(message)
   return (
     <div className="login">
     

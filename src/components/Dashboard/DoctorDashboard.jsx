@@ -38,7 +38,7 @@ const DoctorDashboard = ({
               />
             </div>
           </div>
-          <div className="appointments--header" style={{ marginTop: "5rem" }}>
+          {/* <div className="appointments--header" style={{ marginTop: "5rem" }}>
             Dashboard
           </div>
           <div
@@ -55,7 +55,7 @@ const DoctorDashboard = ({
               className="dashboard__card--bookbtn"
               style={{ marginRight: 0 }}
             />
-          </div>
+          </div> */}
           {doctor ? (
             <div className="dashboard__cards">
               <div className="dashboard__card dashboard__card--profile">
