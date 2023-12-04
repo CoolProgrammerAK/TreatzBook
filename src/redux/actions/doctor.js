@@ -6,6 +6,7 @@ import {
   CLEAR_PROFILE,
   GET_BOOKING,
   SPECIFIED_DOCTORS,
+  DOCTORS_LOADING,
 } from "../ActionConstants";
 
 // Get all doctors
@@ -61,9 +62,10 @@ export const getDoctorsBySearch = (s) => async (dispatch) => {
       "Content-Type": "application/json" // this shows the expected content type
     },
   };
+  dispatch({type:DOCTORS_LOADING})
   const res= await fetch("https://doctrec--preshitx.repl.co/api/?symptoms="+s)
   const d = await res.json();
-  console.log(d)
+  // console.log(d)
    var searchText=d.predicted_specialization
   try {
     const res = await axios.post(

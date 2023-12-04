@@ -10,14 +10,14 @@ const PatientAppointments = ({ appointments, getBookings, cancelBooking }) => {
     // console.log(date, month, year);
     let today = new Date();
     let time = today.getHours();
-    let todaydate = today.getDate();
+    let todaydate = today.getDate().toString().length < 2 ? "0"+ today.getDate() : today.getDate();
     let todaymonth = today.getMonth() + 1;
     let todayyear = parseInt(today.getFullYear().toString().slice(-2));
-    let todaydatestring = `${todayyear}/${todaymonth}/${todaydate}`;
-    let appointmentdatestring = `${year}/${month}/${date}`;
+    let todaydatestring = `${todaydate}/${todaymonth}/${todayyear}`;
+    let appointmentdatestring = `${date}/${month}/${year}`;
     console.log(todaydatestring, appointmentdatestring);
     // console.log(todaydate, todaymonth, todayyear, year);
-    // console.log(time, date, todaydate, start, end, date === todaydate);
+  //  console.log(time, date, todaydate, start, end, date === todaydate,appointmentdatestring < todaydatestring);
 
     if (
       appointmentdatestring < todaydatestring ||

@@ -6,9 +6,10 @@ import Preloader from "../Preloader/Preloader";
 import { Link } from "react-router-dom";
 import Hospital from "../../assets/svgs/dashboard-hospital.svg";
 import Searchbar from "./Searchbar";
+import ReactLoading from 'react-loading';
 
 const PatientDashboard = ({
-  doctors: { loading, doctorsList,specification },
+  doctors: { loading, doctorsList,specification, searchloading },
   getDoctors,
   getDoctorsSorted,
 }) => {
@@ -60,17 +61,19 @@ const PatientDashboard = ({
       {/* sort section */}
       {specification && <div style={{fontSize:'1.8rem',margin:'2rem 20rem'}}>Based on the symptom, go to <span style={{fontWeight:'bold'}}>{specification}</span></div>}
       <div className="dashboard__sort">
-        <div className="dashboard__sort--title">List of doctors</div>
+        <div className="dashboard__sort--title" style={{textDecoration:'underline'}}>List of doctors</div>
         {!specification && <label>
           <input type="checkbox" checked={checked} onChange={handleChange} />
           {"  "}
           Sort by distance
         </label>}
       </div>
-
+       
       {/* cards */}
-      {loading ? (
-        <Preloader />
+      {searchloading ? (
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+       <ReactLoading type={'spin'} color={'#444cf7'} height={'70px'} width={'70px'} />
+       </div>
       ) : (
         <div className="dashboard__cards">
           {doctorsList.length > 0 ? (

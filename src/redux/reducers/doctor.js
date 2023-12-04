@@ -1,10 +1,11 @@
-import { GET_DOCTOR, GET_DOCTORS, CLEAR_PROFILE, SPECIFIED_DOCTORS } from "../ActionConstants";
+import { GET_DOCTOR, GET_DOCTORS, CLEAR_PROFILE, SPECIFIED_DOCTORS, DOCTORS_LOADING } from "../ActionConstants";
 
 const initialState = {
   doctorSelected: null,
   doctorsList: [],
   loading: true,
-  specification:""
+  specification:"",
+  searchloading:true
 };
 
 export default function (state = initialState, action) {
@@ -16,25 +17,29 @@ export default function (state = initialState, action) {
         ...state,
         doctorsList: payload,
         loading: false,
-        specification:""
+        specification:"",searchloading:false
       };
     case GET_DOCTOR:
       return {
         ...state,
-        doctorSelected: payload,
+        doctorSelected: payload,searchloading:false,
         loading: false, specification:""
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         doctorSelected: null,
-        loading: false, specification:""
+        loading: false, specification:"",searchloading:false
       };
       case SPECIFIED_DOCTORS:
          return {
           ...state,
-          specification:payload
+          specification:payload,searchloading:false
          }
+         case DOCTORS_LOADING:
+          return {
+            ...state,searchloading:true
+          }
     default:
       return state;
   }
