@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import Preloader from "../Preloader/Preloader";
 import { Link } from "react-router-dom";
 import Hospital from "../../assets/svgs/dashboard-hospital.svg";
+import Searchbar from "./Searchbar";
 
 const PatientDashboard = ({
-  doctors: { loading, doctorsList },
+  doctors: { loading, doctorsList,specification },
   getDoctors,
   getDoctorsSorted,
 }) => {
@@ -54,15 +55,17 @@ const PatientDashboard = ({
           />
         </div>
       </div>
-      <h1 className="dashboard__heading">Dashboard</h1>
+      {/* <h1 className="dashboard__heading">Dashboard</h1> */}
+      <Searchbar></Searchbar>
       {/* sort section */}
+      {specification && <div style={{fontSize:'1.8rem',margin:'2rem 20rem'}}>Based on the symptom, go to <span style={{fontWeight:'bold'}}>{specification}</span></div>}
       <div className="dashboard__sort">
         <div className="dashboard__sort--title">List of doctors</div>
-        <label>
+        {!specification && <label>
           <input type="checkbox" checked={checked} onChange={handleChange} />
           {"  "}
           Sort by distance
-        </label>
+        </label>}
       </div>
 
       {/* cards */}

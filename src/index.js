@@ -4,9 +4,13 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
+// preloader
 import Preloader from './components/Preloader/Preloader';
+// routing
 import { AppRouter } from './routers';
+// redux
 import { store } from "./redux/store/store";
+// toast
 import 'react-toastify/dist/ReactToastify.css';
 // styles
 import "./styles/styles.scss";
