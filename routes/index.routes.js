@@ -24,8 +24,11 @@ router.get(
 router.post("/register", authController.register);
 
 router.post("/login", authController.login);
+// doctors
 
 router.get("/getDoctors", doctorController.getDoctors);
+
+router.post("/getDoctorsBySearch", doctorController.getDoctorsBySearch);
 
 router.post("/getDoctorsSorted", doctorController.getDoctorsSorted);
 
@@ -37,6 +40,7 @@ router.get(
   doctorController.getDoctorByUserid
 );
 
+// booking
 router.get("/getBooking/:id", bookingController.getBooking);
 
 router.get(

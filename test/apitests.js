@@ -27,7 +27,7 @@ describe("Register API", () => {
     it("it should GET auth token and user after register", (done) => {
       let data = {
         name: "test1",
-        email: "test111@test.com",
+        email: "test11@test.com",
         password: "test",
       };
       chai
@@ -50,7 +50,7 @@ describe("Login API", () => {
   describe("/POST login", () => {
     it("it should GET auth token and user after login", (done) => {
       let data = {
-        email: "test@test.com",
+        email: "test11@test.com",
         password: "test",
       };
       chai
@@ -91,7 +91,7 @@ describe("getDoctors API", () => {
 describe("getDoctorsSorted API", () => {
   describe("/GET getDoctorsSorted", () => {
     it("it should GET all doctors sorted by given coordinates", (done) => {
-      let data = { long: 25.0, lat: 34.0 };
+      let data = { long: -73.63739750375483, lat: 45.49899470630268 };
       chai
         .request(server)
         .post("/api/getDoctorsSorted")
@@ -107,58 +107,58 @@ describe("getDoctorsSorted API", () => {
 });
 
 // getDoctor
-// describe("getDoctor API", () => {
-//   describe("/GET getDoctor", () => {
-//     it("it should GET doctor by id", (done) => {
-//       let data = new Doctors({
-//         user_id: "5e9f8f8f8f8f8f8f8f8f8f8",
-//         doctorName: "a",
-//         hospitalName: "a",
-//         hospitalAddress: "a",
-//         specialization: "a",
-//         fees: 200,
-//         city: "a",
-//         state: "a",
-//         country: "India",
-//         location: {
-//           type: "Point",
-//           coordinates: [],
-//         },
-//       });
-//       chai
-//         .request(server)
-//         .get("/api/getDoctor/" + data.id)
-//         .send(data)
-//         .end((err, res) => {
-//           should.exist(res.body);
-//           res.should.have.status(200);
-//           res.body.should.be.a("object");
-//           done();
-//         });
-//     });
-//   });
-// });
+describe("getDoctor API", () => {
+  describe("/GET getDoctor", () => {
+    it("it should GET doctor by id", (done) => {
+      let data = new Doctors({
+        user_id: "5e9f8f8f8f8f8f8f8f8f8f8",
+        doctorName: "a",
+        hospitalName: "a",
+        hospitalAddress: "a",
+        specialization: "a",
+        fees: 200,
+        city: "a",
+        state: "a",
+        country: "India",
+        location: {
+          type: "Point",
+          coordinates: [],
+        },
+      });
+      chai
+        .request(server)
+        .get("/api/getDoctor/" + data.id)
+        .send(data)
+        .end((err, res) => {
+          should.exist(res.body);
+          res.should.have.status(200);
+          res.body.should.be.a("object");
+          done();
+        });
+    });
+  });
+});
 
 // getBooking
-// describe("/GET/:id booking", () => {
-//   it("it should GET a booking by the given id", (done) => {
-//     let booking = new Booking({
-//       user_id: "5e9f8f8f8f8f8f8f8f8f8f8",
-//       doctor_id: "5e9f8f8f8f8f8f8f8f8f8f8",
-//       bookingDate: "2020-01-01",
-//       start: 10,
-//       end: 11,
-//     });
-//     booking.save((err, booking) => {
-//       chai
-//         .request(server)
-//         .get("/getBooking/" + booking.id)
-//         .send(booking)
-//         .end((err, res) => {
-//           res.should.have.status(200);
-//           res.body.should.be.a("object");
-//           done();
-//         });
-//     });
-//   });
-// });
+describe("/GET/:id booking", () => {
+  it("it should GET a booking by the given id", (done) => {
+    let booking = new Booking({
+      user_id: "6567e8c863991ce9f4399a51",
+      doctor_id: "6567f31a52f9700c13a13611",
+      bookingDate: "11/30/23",
+      start: 15,
+      end: 16,
+    });
+    booking.save((err, booking) => {
+      chai
+        .request(server)
+        .get("/getBooking/" + booking.id)
+        .send(booking)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a("object");
+          done();
+        });
+    });
+  });
+});

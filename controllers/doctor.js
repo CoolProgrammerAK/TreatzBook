@@ -16,6 +16,16 @@ module.exports.getDoctors = async (req, res) => {
   }
 };
 
+ module.exports.getDoctorsBySearch = async (req, res) => {
+  try {
+    const doctors = await Doctor.find({specialization:req.body.searchText});
+    res.status(200).json(doctors);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports.getDoctorsSorted = async (req, res) => {
   try {
     const { long, lat } = req.body;
