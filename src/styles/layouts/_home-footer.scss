@@ -7,7 +7,24 @@
   );
   position: relative;
   padding: 4rem;
-
+  &_gradient-text{
+    background: -webkit-gradient(linear, left top, right top, from(#05e4f7), color-stop(60%, #f8ffb4));
+  background: linear-gradient(to right, #05e4f7, #f8ffb4 60%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  }
+  &_text{
+    color: white;
+    font-size: 17px;
+  }
   &__main {
     display: flex;
     align-items: center;

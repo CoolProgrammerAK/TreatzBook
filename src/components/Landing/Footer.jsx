@@ -1,11 +1,33 @@
 import React from "react";
-
+import {Link} from 'react-router-dom'
 import MessageLogo from "../../assets/svgs/hero-message.svg";
 
 const Footer = () => {
   return (
     <footer className='home-footer'>
-      <h1 className='heading heading--primary center-content'>
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <h1 className="home-footer_gradient-text">TreatzBook</h1>
+      </Link>
+      <div style={{display:'flex',flexDirection:'row'}}>
+      <a className="home-footer_text" href="/" style={{ textDecoration: "none" }}>
+     Home
+      </a>
+      <a className="home-footer_text" href="#about" style={{ textDecoration: "none" ,padding:'0px 20px'}}>
+      About
+      </a>
+      <a className="home-footer_text" href="#services" style={{ textDecoration: "none" }}>
+      Services
+      </a>
+      </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+{/* <h1 className='heading heading--primary center-content'>
         <span className='highlight'>Contact Us</span>
       </h1>
       <div className='home-footer__main'>
@@ -16,7 +38,7 @@ const Footer = () => {
           <form action='' className='form home-footer__form'>
             {/* <h2 className="heading heading--primary heading--primary--white">
                 Get in touch
-            </h2> */}
+            </h2> 
             <div className='form__group form__group--first'>
               <input
                 type='text'
@@ -57,9 +79,4 @@ const Footer = () => {
             <button className='button button--primary'>Send Message</button>
           </form>
         </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;
+      </div> */}
